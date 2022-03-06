@@ -1,8 +1,8 @@
 class Perceptron {
-  weights = new Array(2);
   lr = 0.1; // learning rate for steering
 
-  constructor() {
+  constructor(n) {
+    this.weights = new Array(n);
     for (let i = 0; i < this.weights.length; i++) {
       this.weights[i] = random(-1, 1);
     }
@@ -37,5 +37,16 @@ class Perceptron {
       // "steer" weight towards the target (slowed down by learning rate)
       this.weights[i] += error * inputs[i] * this.lr;
     }
+  }
+
+  guessY(x) {
+    let w0 = this.weights[0];
+    let w1 = this.weights[1];
+    let w2 = this.weights[2];
+    return -1 * (w2 / w1) * 1 - (w0 / w1) * x;
+
+    // let m = this.weights[1] / this.weights[0]; //w0, w1
+    // let b = this.weights[2]; // bias
+    // return m * x + b;
   }
 }
